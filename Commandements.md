@@ -1,4 +1,4 @@
-#Les N commandements du PYTHON
+# Les N commandements du PYTHON
 
 0. Point de tabulations ne placera, par 4 espaces tu les remplaceras.
 0. Après une ligne se terminant par : , un bloc d'instructions indenté tu écriras.
