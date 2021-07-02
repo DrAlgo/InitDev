@@ -10,3 +10,16 @@
 1. choix : if/elif/else et variantes
 2. [listes, indices, valeurs](https://github.com/DrAlgo/InitDev/blob/main/seq_0_Visite_Guidee/fiche_0_2_listes.ipynb)
 3. [La boucle for](https://github.com/DrAlgo/InitDev/blob/main/seq_0_Visite_Guidee/fiche_0_3_for_range.ipynb)
+4. Mini-projet : le monnayeur
+
+## Séquence 1 : Listes
+0. Le type `list`et ses méthodes
+1. Introduction à la complexité algorithmique
+2. Les fonctions pour factoriser le code
+3. Algorithmes classiques dans les listes (TD ?)
+4. Files et piles (ou plus tard)
+5. Mini-projets : simulations aléatoires
+
+## Séquence 2 : 
+1. modules / scripts
+2. prise en main libgrapyque
