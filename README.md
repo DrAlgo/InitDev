@@ -12,6 +12,13 @@
 3. [La boucle for](https://github.com/DrAlgo/InitDev/blob/main/seq_0_Visite_Guidee/fiche_0_3_for_range.ipynb)
 4. Mini-projet : le monnayeur
 
+## Séquence 1 alternative : Structures de données de base
+0. Le type `list` et ses méthodes
+1. Les types `dict` et `set`
+2. Introduction à la complexité algorithmique
+3. Choisir la bonne structure de donnée
+4. Mini-projet : simulations aléatoires
+
 ## Séquence 1 : Listes
 0. Le type `list`et ses méthodes
 1. Introduction à la complexité algorithmique
