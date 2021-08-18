@@ -9,7 +9,7 @@
 0. [types, opérateurs, expressions](https://github.com/DrAlgo/InitDev/blob/main/seq_0_Visite_Guidee/fiche_0_1_visite_guidée.ipynb)
 2. [listes, indices, valeurs](https://github.com/DrAlgo/InitDev/blob/main/seq_0_Visite_Guidee/fiche_0_2_listes.ipynb)
 3. [La boucle for](https://github.com/DrAlgo/InitDev/blob/main/seq_0_Visite_Guidee/fiche_0_3_for_range.ipynb)
-4. Mini-projet : le monnayeur
+4. [Mini-projet : le monnayeur](https://github.com/DrAlgo/InitDev/blob/main/seq_0_Visite_Guidee/MiniProj1-monnayeur.ipynb)
 
 ## Séquence 1 alternative : Structures de données de base
 0. Le type `list` et ses méthodes
