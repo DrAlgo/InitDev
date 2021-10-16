@@ -168,126 +168,70 @@ IUT de Vélizy\\
 
 \thispagestyle{empty}
 
-%\includegraphics
-
-\begin{icone}{lecture.jpg}
-    {\bf Ce symbole indique un texte à lire attentivement avant de se lancer dans les exercices qui suivent.}
-
-    bla
-\end{icone}
 
 \section{Notion de script}
 
+\begin{icone}{lecture.jpg}
+Jusqu'à présent, vous avez écrit du python dans l'environnement interactif {\it jupyter}. Mais en général les programmes python sont indépendants de ce genre d'environnement et peuvent être exécutés "directement".
+
+Un {\it script} python est simplement un fichier texte, dont l'extension est en général {\tt .py} et qui contient du code. Un programme python est en général un ensemble de scripts.
+
+	En python, un script s'appelle un {\it module}, il y a quelques nuances mais ça ira pour l'instant. Plus de détails dans \url{https://docs.python.org/fr/3/tutorial/modules.html}
+
+Pour écrire un tel script, on peut utiliser un simple {\it éditeur de texte} (gedit, vim, emacs, geany, sublimetext,...) ou un {\it environnement de développement intégré} (IDE) (eclipse, pycharm, jetbrains,vscode,...), qui est un éditeur de texte avec de nombreuses fonctions supplémentaires pour écrire du code.
+
+Dans cette séquence, afin de ne pas tout mélanger, nous utiliserons l'éditeur {\bf geany} qui est très simple. Par la suite, vous ferez comme vous voudrez.
+\end{icone}
 
 
-
-\section{Next}
-
-\begin{icone}{sacoche.png}
-    {\bf Ce symbole précise les compétences SACoche liées aux exercices qui suivent.}
-
-    \bigskip
-
-    {\sc type}
-\end{icone} 
-
-\bigskip
+\section{Prise en main}
 
 \begin{action}
-\item Dans le mode console : définissez deux variables $a$ et $b$ valant respectivement 10 et 3, calculez ce que valent $a + b$, $a * b$ ou $a/b$. Changez la valeur de $b$ en $3.0$ et recommencez. Quelle est la différence ?
-\item Toujours dans le mode console, utilisez la fonction {\tt type} pour demandez le type des objets. Créez des variables entières, des réels, des chaînes de caractères et affichez leur type.
-\item Affichez maintenant une phrase mélangeant une chaîne de caractère et la valeur d'une variable.
+\item Ouvrez l'éditeur de texte {\it geany}. Tapez quelques lignes de code dans l'éditeur, par exemple effectuez une boucle pour écrire 10 fois "bonjour".
+\item Enregistrez dans votre dossier de la sequence3 ce programme sous le nom {\tt first\_script.py}
+\item Maintenant, ouvrez un terminal et naviguez en ligne de commande jusqu'à vous trouver dans le répertoire où se trouve le script.
+\item Tapez dans la ligne de commande
+
+	\begin{center}
+		\tt python3  first\_script.py
+		\end{center}
+N'oubliez pas que la touche TAB permet de compléter automatiquement. En principe, vous devriez voir dans le terminal la sortie de votre programme. Sinon, c'est peut-être que vous avez un message d'erreur.
+\item Retenez la procédure ci-dessus, il faudra toujours la faire pour exécuter les programmes python.
 \end{action}
 
-\bigskip
+\section{Ecriture d'une librairie pour gérer les trucs à faire}
 
 \begin{icone}{lecture.jpg}
-À partir de maintenant les exercices seront à traiter en écrivant des scripts (ou programmes) python. N'hésitez pas à revoir les vidéos correspondantes si nécessaire. N'oubliez pas d'ajouter la ligne
-
-{    \tt \#coding: utf-8}
-
-au début du programme si vous n'utilisez pas que des caractères ascii (accents, etc.)
-\end{icone}
+	Quand vous exécutez le script, python va tout lire et exécuter, dans l'ordre du script, de haut en bas. Quand python tombe sur la définition d'une fonction,({\tt def ...}  il n'exécute pas le code de la fonction, il prend juste note de son existence. Pour vraiment exécuter la fonction, il faut l'appeler !
+\end{icone} \\
 
 
-\begin{action}
-\item \'Ecrivez un programme {\it age.py} qui demande son âge à l'utilisateur et répond en utilisant sa réponse au milieu d'une phrase, comme par exemple en lui donnant l'âge qu'il aura en 2027 (ou sinon, soyez imaginatifs, c'est vous les jeunes :) )
-\item \'Ecrivez {\tt matieres.py} : demandez maintenant deux informations à l'utilisateur, sous forme de chaînes de caractères, et faites une phrase avec les deux informations. Par exemple, on lui demande le nom de ses deux matières préférées, et on répond "moi aussi j'adore (...) et (...) ."  ({\small Réponse : programmation et algorithmique}). {\it Attention à bien différencier les fonctions natives {\tt input} qui renvoie une {\it valeur} et {\tt raw\_input} qui renvoie une chaîne de caractères.}
-\item Dans {\tt queltype.py}, demandez à l'utilisateur d'entrer une valeur avec {\tt input}, stockez la dans une variable et affichez son type. Rappel : {\tt type(a)} renvoie le type d'une variable a. Vous pouvez l'afficher avec {\tt print}. Testez avec différentes valeurs : {\tt 35, 284736537, -35, 2.4, -10.6, "bonjour", "b", [2,4,3], ["bonjour, "au revoir"], ...} . regardez bien le type à chaque fois.
+Vous allez maintenant réaliser un petit module avec quelques fonctions ayant pour but de gérer une liste de tâches à réaliser ou {\tt todolist}. Plus précisément, on veut avoir en mémoire un ensemble de tâches à réaliser comme :
 
-\item Dans {\tt affichages.py}, affichez (sans utiliser de boucle) :
-    \begin{itemize}
-        \item la chaîne "aaaaaa..." (250 "a")
-        \item la chaîne "bbbb....a" (250 "b" suivis d'un "a")
-        \item la chaîne "bbbb....aaabbb..." (250 "b" suivis d'un "a" suivis de 100 b)
-        \item La liste [0,1,...1000] (au complet)
-        \item La liste [1000,1001,...1507] (au complet)
-        \item 50 fois "bonjour" en allant à la ligne à chaque fois (utilisez "\textbackslash n")
-    \end{itemize}
+\begin{verbatim}
+Tâches priorité haute :
+	- réviser cours dev
+	- appeler Mamie
+Tâches priorité moyenne :
+	- vaisselle
+Tâches priorité basse :
+	- finir de regarder F&F 42
+	- réviser encore cours dev
+\end{verbatim}
 
-\end{action}
-
-\newpage
-\section{Les boucles}
-
-\begin{icone}{youtube.jpg}
-    La boucle {\tt while} en python
-
-    La boucle {\tt for} en python
-\end{icone}
-
-\bigskip
-
-\begin{icone}{tuto.jpg}
-Partie 4 du tutoriel :
-
-\url{https://docs.python.org/fr/2.7/tutorial/controlflow.html}
-\end{icone}
-
-
-\bigskip
-
-\begin{icone}{sacoche.png}
-{\sc BOUCLES1, BOUCLES2, BOUCLES?}\\
-\end{icone} 
-
-\bigskip
-
-
-
+Vous pouvez imaginer autre chose et faire des variations plus avancées sur ce principe (possibilité de prévoir des tâches à des dates fixées, etc.)
 
 \begin{action}
-\item \'Ecrire un programme qui affiche 50 fois "bonjour", cette fois-ci en utilisant une boucle {\tt while}.
-\item Même exercice avec une boucle {\tt for}.
-\item \'Ecrire un programme qui demande un mot et un entier, et affiche autant de fois le mot entré. Attention à distinguer {\tt raw\_input} et {\tt input}.
-\item \'Ecrire un programme qui affiche un rectangle d'étoiles de p lignes et q colonnes. Par exemple si on entre 3 pour p et 12 pour q, la sortie sera: 
-    \begin{lstlisting}
-    *************
-    *************
-    *************
-    \end{lstlisting}
+\item Créez deux scripts, {\tt todolist.py} et {\tt test\_todo.py}. Le premier contiendra l'ensemble des fonctions pour manipuler la todolist mais pas de code qui s'exécute directement, et le second les tests. Vous n'exécutez jamais le premier directement, vous exécutez le module de test qui lui se servira des fonctions écrites dans l'autre.
+\item A vous de décider comment vous allez gérer la sauvegarde des tâches et leur priorité. Créez une fonction qui affiche l'ensemble des tâches comme ci-dessus. Bien entendu, vous écrivez la spécification de la fonction.
+\item Dans votre fichier de tests, qui doit se trouver dans le même répertoire, écrivez {\tt import todolist} avant votre code. Ecrivez maintenant une fonction de test de votre affichage et appelez-la.
+\item Maintenant, à chaque fois vous devez écrire la fonction, sa spécification, et la fonction de test. De préférence, d'abord la fonction de test. Créez une fonction pour ajouter une tâche. Attention, je n'ai pas dit saisir une tâche au clavier.
+\item Ecrivez aussi des fonctions pour supprimer une tâche, ou pour archiver une tâche déjà effectuée, pour changer la priorité d'une tâche, et toute autre fonction que vous pourrez imaginer qui pourrait servir dans votre librairie.
 
-\item \'Ecrire un programme qui affiche un triangle d'étoiles de taille donnée, par exemple si on entre $6$ le programme affiche :
-
-    \begin{lstlisting}
-    *
-    **
-    ***
-    ****
-    *****
-    ******
-    \end{lstlisting}
-
-\item Même exercice mais cette fois la sortie est 
-
-    \begin{tabular}{cccccc}
-        & & & & &*\\
-        & & & &*&* \\
-        & & &*&*&* \\
-        & &*&*&*&* \\
-        &*&*&*&*&* \\
-        *&*&*&*&*&* \\
-    \end{tabular}
+\item Ecrivez un test complet de votre librairie : cela crée une todolist, ajoute quelques tâches, les affiche, supprime et ajoute d'autres tâches, affiche, etc.
 \end{action}
+
+
+
 
 \end{document}
