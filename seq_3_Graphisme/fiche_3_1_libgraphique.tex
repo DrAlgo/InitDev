@@ -1,0 +1,332 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amssymb,amsmath,amsfonts}    %ams
+\usepackage{wasysym} %des symboles
+\usepackage[tmargin=1in,bmargin=1in,lmargin=.75in,rmargin=.75in]{geometry}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,backgrounds}
+
+\usepackage[utf8]{inputenc} 
+\usepackage{listings}
+
+\newcommand{\R}{{\mathbb R}}   % reals
+\newcommand{\Q}{{\mathbb Q}}   % rationals
+\newcommand{\N}{{\mathbb N}}   %natural numbers
+\newcommand{\Z}{{\mathbb Z}}    %integers
+\renewcommand{\P}{{\mathbb P}}   %primes
+\newcommand{\F}{{\mathbb F}}
+
+\newcommand\cc{{\cal C}}
+\newcommand{\cw}{{\cal W}}
+
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem{example}{Example}
+\newtheorem{lemma}{Lemma}
+\newtheorem{newcommandi}{Definition}
+
+
+\newcommand{\proof}{\noindent {\bf Proof.\ \ }}
+
+\newcommand{\qed}{\hfill $\square$}
+
+
+\newcommand{\card}[1]{\vert #1 \vert}
+
+\usepackage{fancybox}
+\usepackage[french]{babel}
+\usepackage{multicol}
+\setlength{\columnseprule}{0.2pt}
+\setlength{\columnsep}{16pt}
+\usepackage{fancyhdr} % personalisation tete/pied de page
+
+
+
+% CODE C
+\lstdefinelanguage{pseudoC}%
+  {morekeywords={auto,break\c{c}ase\c{c}har\c{c}onst\c{c}ontinue,default,do,double,%
+     else,enum,extern,float,for,goto,if,int,long,register,return,%
+     short,signed,sizeof,static,struct,switch,typedef,union,unsigned,%
+     void,volatile,while},%
+     sensitive,%
+     morecomment=[s]{/*}{*/},%
+     morecomment=[l]//,% nonstandard
+     morestring=[b]",%
+     morestring=[m]',% changed from `b' to `m'
+     moredelim=*[directive]\#,%
+     moredirectives={define,elif,else,endif,error,if,ifdef,ifndef,line,%
+     include,pragma,undef,warning}}[keywords,comments,strings,directives]%
+     
+\lstdefinestyle{pseudoc}{
+     language=pseudoC,
+     basicstyle=\ttfamily,
+%      basicstyle=\small\sffamily,
+%      numbers=left,
+%      numberstyle=\tiny,
+%      frame=L,
+     columns=fullflexible,
+     showstringspaces=false
+     }
+
+\lstnewenvironment{ccode}{
+\lstset{style=pseudoc}}{}
+
+\lhead{Fiche 3-1 : exercices graphiques}
+\rhead{\thepage}
+\cfoot{}
+\addtolength{\headheight}{50pt}
+
+\setlength{\parindent}{0pt}
+
+\title{Initiation au développement}
+\author{BUT Informatique\\
+IUT de Vélizy\\
+année 2021-2022}
+\date{}
+
+
+\catcode`\_=12 %for escaping underscore
+
+
+\usepackage{marginnote}
+
+\usepackage{fancyvrb} % Verbatim avancé
+
+
+\newcommand{\reflexion}{\hspace{-1.2cm} \includegraphics[width=1cm]{img/reflexion.jpg} \vskip -.8cm}
+\newcommand{\checkbox}{$\square$ \smallskip}
+
+
+%%environement pour le symbole lecture et un decalage
+\newenvironment{lecture}{%
+\smallskip
+\begin{tabular}{c|c}
+    \hspace{.03\textwidth} \includegraphics[width=.07\textwidth]{img/lecture.jpg} & 
+\begin{minipage}{.85\textwidth}
+}{%
+\end{minipage}
+\end{tabular}
+}
+
+
+
+\newcounter{exo} \setcounter{exo}{0}
+\newenvironment{action}{%
+    \begin{enumerate}[\numerotation] \addtocounter{exo}{-1}%
+        }{%
+    \end{enumerate}
+}
+
+%environement pour liste avec checkbox avec compteur
+\newcommand{\numexoa}{\theexo \addtocounter{exo}{1}}
+\newcommand{\numerotation}{\checkbox \smallskip \numexoa.}
+
+%%environement de validation
+\newenvironment{validation}{%
+\smallskip
+\begin{tabular}{c|c}
+    \hspace{.03\textwidth} \includegraphics[width=.07\textwidth]{img/teacher.jpg} & 
+\begin{minipage}{.85\textwidth}
+}{%
+\end{minipage}\\
+\hline
+\end{tabular}
+}
+
+
+%pour les fichiers c et dossiers
+\newcounter{exoo} \setcounter{exoo}{0}
+\newcommand{\numexo}{\theexoo}
+\newcommand{\repexo}{{\tt exo_\numexo}}
+\newcommand{\exoplus}{\addtocounter{exoo}{1}}
+
+
+
+
+\begin{document}
+% \maketitle
+
+
+
+
+
+\thispagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{center}
+{\fcolorbox{gray!50}{gray!50}{\Large \tt Fiche 3-1 : exercices graphiques}
+\end{center}
+
+\vskip 1cm
+
+Dans cette fiche, vous allez réaliser des programmes graphiques en vous aidant sur la {\tt libgrapythk} (voir mode d'emploi).
+
+\section*{Comment utiliser la {\tt libgrapythk}?}
+
+\begin{action}
+%%%%%%%%COPIE DU REPERTOIRE%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Pour utiliser la {\tt libgrapythk} dans vos programmes: 
+\begin{enumerate}
+  \item Assurez-vous d'avoir, dans le même répertoire que votre programe, le fichier {\tt ligrapythk.py} qui vous est fourni sur Moodle.
+  \item Dans votre programme, placez en tête de fichier la commande {\tt import libgrapythk}
+\end{enumerate}
+\end{action}
+    
+\begin{lecture}
+{\bf {\tt libgrapythk} sur votre machine.} Pour que la {\tt libgrapythk} fonctionne sur votre machine, vous devez disposer de {\it python3} et avoir installé les modules {\tt python3-tk} et {\tt PIL}.
+\end{lecture}
+
+\begin{action}
+%%%%%%EXEMPLE_1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item {\bf Premier exemple.} Lisez le code source qui vous est fourni avec la {\tt libgrapythk} dans {\tt main.py}, puis exécutez ce script. Le programme se déroule en même temps dans une fenêtre graphique et dans le terminal. Essayez de bien comprendre le lien entre ce qui se déroule et le contenu de {\tt main.py}.
+
+\item Lisez attentivement la première page de la notice d'utilisation de la {\tt libgrapythk} à la fin de ce document.\\
+{\bf C'est votre manuel de référence pour la librairie graphique, vous devez toujours l'avoir sous la main.}
+\end{action}
+
+\section*{C'est parti\dots}
+\subsection*{Quelques petits apéritifs afin de trouver ses marques}
+\begin{lecture}
+{\bf Se repérer dans la fenêtre graphique.} Dans notre exemple précédent, la fenêtre possède une taille de 800 pixels horizontalement et de 600 pixels verticalement. Le schéma suivant vous indique les coordonnées des quatre coins de la fenêtre pour vous aider à vous repérer, ainsi que la position de votre première oeuvre graphique: la ligne que vous devrez dessiner dans le prochain exercice\dots
+\end{lecture}
+
+\begin{center}
+    \begin{tikzpicture}
+        \fill (0,0)  circle [radius=2pt];
+        \fill (4,0)  circle [radius=2pt];
+        \fill (4,3)  circle [radius=2pt];
+        \fill (0,3)  circle [radius=2pt];
+
+
+
+        \draw[->,>=latex] (0,3) -- (0,-.5) ;
+        \draw[->,>=latex] (0,3) -- (5,3) ;
+        \node at (-.5,3) {(0,0)} ;
+        \node at (-.7,0) {(0,599)} ;
+        \node at (4.8,0) {(799,599)} ;
+        \node at (4,3.2) {(799,0)} ;
+        \node at (0,-.7) {y} ;
+        \node at (5.2,3) {x} ;
+        \draw (0,0) -- (4,0) ;
+        \draw (4,0) -- (4,3) ;
+
+        \draw[dotted] (0,1.5) -- (4,1.5) ;
+        \node at (2,1.7) {\scriptsize ligne à dessiner} ;
+
+    \end{tikzpicture}
+    
+\end{center}
+
+\begin{action}
+%%% LIGNE HORIZONTALE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \exoplus {\bf Ligne horizontale} Ouvrez le programme {\tt exo1.py}.  Complétez ce programme (qui pour l'instant ne fait qu'ouvrir une fenêtre, attendre un clic et la refermer) de sorte qu'il dessine une ligne horizontale verte divisant l'écran en 2. Pour vous aider, lisez la notice d'utilisation: vous devez utiliser la fonction {\tt dessinerLigne}.
+\end{action}
+
+\begin{action}
+%%% LIGNE VERTICALE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item {\bf Ligne verticale.} Toujours dans {\tt exo1.py}, ajoutez une ligne verticale bleue coupant l'écran en deux.
+%%%% DIAGONALES%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item {\bf Diagonales.} Tant que vous y êtes, tracez les deux diagonales de l'écran.
+\item {\bf Carrément} Tracez un carré (vide) de côté 100 avec quatre lignes, {\bf centré sur l'intersection des diagonales}.
+\end{action}
+
+\begin{lecture}
+    {\bf Les couleurs.} Un bon paquet de couleurs sont prédéfinies et il suffit d'écrire leur nom comme {\tt blue, green} ou {\tt magenta} pour les utiliser. Voir la liste des couleurs à la fin de la notice.
+\end{lecture}
+
+\begin{action}
+\item {\bf Un pixel blanc.} Dans un nouveau fichier \exoplus \repexo, coloriez en blanc le pixel de coordonnées (150,120) à l'aide de la fonction {\tt changerPixel}.
+\item {\bf Pointillés.} On souhaite maintenant allumer en blanc tous les pixels d'ordonnée 50 et d'abscisse paire comprise entre 100 et 200, c'est à dire les pixels de coordonnées {\tt (100,50), (102,50), (104,50), (106,50)}\dots Utilisez une boucle! (vous êtes balaise en boucles maintenant)
+\end{action}
+
+\subsection*{Des boucles}
+\begin{action}
+\item {\bf 10 sur 10.} \exoplus On passe à l'\repexo. 
+Dessinez sur l'écran un quadrillage composé de lignes horizontales et de lignes verticales séparées de 10 pixels. Couleurs aux choix...
+\item {\bf C'est vraiment cyan.} \exoplus \repexo : colorez un par un en cyan les pixels de tout l'écran avec {\tt changerPixel}. Vous ne voyez rien? Vous devez probablement appeler {\tt actualiser} (voir la notice).
+\end{action}
+
+\begin{lecture}
+{\bf Allez y mollo avec {\tt actualiser}}: cette fonction implique un rafraîchissement de tout l'écran, qui est assez coûteux en temps machine. Il est beaucoup plus rapide de n'actualiser qu'une fois toutes les modifications faites.\\
+Si votre exercice précédent est trop lent, c'est très probablement que vous avez placé {\tt actualiser} dans votre double boucle. Essayez de le sortir des boucles et appréciez la différence.
+\end{lecture}
+
+\begin{action}
+\item {\bf Tricolore.} \exoplus \repexo : Colorez un par un les pixels de tout l'écran en alternant entre trois couleurs de votre choix (utiliser l'opérateur modulo \%). Par exemple, les pixels seront vert, jaune, rouge, vert, jaune, rouge, etc. Et quand on revient à la ligne on utilise la couleur qui devrait suivre le dernier point de la ligne précédente. Remarque : 800 n'étant pas divisible par 3, ceci tracera des lignes de couleur qui seront en diagonale et non verticales.
+\item {\bf Tripentacolore.} \exoplus \repexo : idem mais en alternant entre trois couleurs de votre choix tous les cinq pixels( cinq pixels de la première couleur, cinq de la deuxième, etc).
+\end{action}
+
+\subsection*{Un peu d'interaction avec l'utilisateur}
+\begin{action}
+\item {\bf Carré au clic.} \exoplus \repexo Votre objectif: attendre un clic de l'utilisateur et tracer avec {\tt dessinerRectangle} un carré de côté 50 centré sur le point cliqué. \\
+{\bf Besoin d'aide?}: allez voir le mode d'emploi de {\tt attendreClic} pour découvrir comment récupérer les coordonnées cliquées.
+\item {\bf 5 carrés au clic.} Modifiez la question précédente de sorte que l'on répète 5 fois cette action (donc cinq carrés au final). Avec une boucle, et non pas en répétant cinq fois le même code !
+\item {\bf Effacer les précédents.} Modifiez la question précédente de sorte qu'à chaque fois on efface le carré précédent.
+\end{action}
+
+\begin{lecture}
+    Effacer un objet, c'est simplement le supprimer. Voir la notice...
+\end{lecture}
+\begin{action}
+
+\item {\bf Rectangle défini à la souris.} Complétez votre programme afin d'attendre ensuite deux clics de l'utilisateur pour dessiner un rectangle dont les coins sont les deux points cliqués (haut-gauche puis bas-droite).
+
+\item {\bf Deux conditions.} Dans \exoplus l'\repexo : tracer une ligne blanche qui sépare verticalement l'écran en deux, puis comme précédemment afficher un carré là où clique l'utilisateur. Contrainte supplémentaire : si on clique à gauche de la ligne, le carré sera vert, sinon à droite il sera bleu.
+\item {\bf Trois conditions.} \exoplus \repexo : séparer l'écran en deux comme précédemment. Attendre trois clics ; si les trois clics sont du même côté alors afficher un carré bleu autour du dernier clic, sinon afficher un carré rouge.
+\end{action}
+
+\subsection*{Le jeu du monstre}
+{\it On passe aux choses sérieuses: nous allons concevoir un petit jeu graphique à la souris.}
+\begin{action}
+\item {\bf Le terrain de jeu et le joueur. }\exoplus \repexo : Dessinez un quadrillage de l'écran par des lignes séparées de 20 pixels (reprenez et modifiez le code de l'{\tt exo_3}). Faites en sorte que lorsque l'utilisateur clique dans un carré, l'intérieur de celui-ci devienne rouge. {\bf Attention}, le rouge ne doit pas déborder sur le quadrillage ni laisser d'espace vide.\\
+{\bf De l'aide?} Quand on clique dans un carré, vous récupérez une position qui n'est généralement pas le coin haut-gauche dont vous avez besoin pour dessiner ce carré. Il vous faut alors effectuer un calcul afin d'obtenir cette position. Il se pourrait que le modulo vous soit utile\dots
+\item {\bf Déplacement du joueur.} Modifiez ce programme de sorte que l'utilisateur puisse \og sélectionner \fg un carré et changer d'avis : lorsqu'il clique dans un carré, celui-ci devient rouge, mais s'il clique dans un autre carré, le carré précédent disparait et le nouveau devient rouge, ceci 10 fois de suite.\\
+\item {\bf Un terrain plus joli.} \exoplus \repexo : Même exercice que le précédent, mais plutôt qu'un quadrillage, l'écran est un damier constitué de carrés verts et bleus de côté 20. Chaque carré doit reprendre sa couleur de départ quand on en sélectionne un autre. \\
+\item {\bf Sélection du voisinage.} \exoplus \repexo : Comme l'exercice précédent, mais maintenant l'utilisateur ne peut choisir qu'un des carrés voisins (diagonale possible). Si l'utilisateur clique dans un carré non voisin alors rien ne se passe.
+\item {\bf Le très horrible monstre jaune.} Ajoutez un carré de couleur jaune qui apparaît dès le lancement du programme sur une position aléatoire du damier. Ensuite, quand votre joueur rouge se déplace, il lui est impossible d'aller sur la case jaune.
+\item {\bf Le jeu!} \repexo:  Tout est en place, ne reste qu'à lancer la mécanique: à chaque fois que le joueur rouge se déplace dans son voisinage, le monstre se déplace également automatiquement d'une case \emph{vers le joueur} (au moins de façon à se rapprocher). Si après son mouvement le monstre est sur la case du  joueur, le programme s'arrête et le joueur a perdu.
+
+
+\item {\bf Make it harder.} (A faire seulement si vous êtes en avance) Et si maintenant il y avait deux, ou trois monstres ? Ou des murs ?
+\end{action}
+\begin{validation}
+    Validation : faites nous voir ça 
+\end{validation}
+\bigskip
+
+\subsection*{Déplacement au clavier}
+\begin{action}
+\item \exoplus \repexo : Lire dans la notice comment utiliser la fonction {\tt recupererTouche}. Dessinez un carré de côté 50, que l'on peut déplacer avec les flèches du clavier. \emph{Indication : Dans une boucle, attendre qu'une touche soit appuyée et déplacez le carré de quelques pixels suivant la touche appuyée.} Attention, le carré ne doit pas pouvoir "sortir" de l'écran et s'il rencontre un bord d'écran, il doit être bloqué dans cette direction.
+\item Améliorez le code précédent en faisant en sorte que le programme se termine au cas où on appuie sur la touche espace.
+\end{action}
+
+\newpage
+\subsection*{Du mouvement: les carrés rebondissants}
+\begin{action}
+\item {\bf Un carré dans le mur.} \exoplus \repexo : dessinez un carré de côté 50 là où clique l'utilisateur ; le carré se déplace alors en suivant le vecteur (5,5) (c'est-à-dire que x augmente de 5 et y augmente de 5) jusqu'à atteindre le bord. Veillez à bien terminer votre boucle au moment exact où le carré atteint le bord ! \\
+Remarque : ici, vous pouvez utiliser, en début de programme, des variaeasble globales pour les coordonnées du vecteur, afin de pouvoir changer facilement le vecteur vitesse ultérieurement.
+{\bf Attention!} Est-ce que votre programme fonctionne quelle que soit la position de départ du carré?
+\end{action}
+
+\begin{lecture}
+{\bf Le dilemme du programmeur}: \og {\it monteriez-vous dans un avion piloté par un programme que vous avez écrit?} \fg  Vous devez systématiquement chercher à imaginer tous les cas possibles et à les résoudre.
+\end{lecture}
+
+\begin{action}
+\item {\bf Rebond.} \exoplus \repexo : même exercice, mais cette fois-ci le carré rebondit sur le bord. Le vecteur de déplacement va donc changer : suivant les cas, il s'agira d'un des quatre vecteurs de la forme $(\pm5,\pm5)$. A vous de trouver lequel pour que cela ait l'air d'un rebond réaliste.
+\end{action}
+
+
+\begin{action}
+\item {\bf Rebond++.} Si vous essayez avec le vecteur vitesse $(2,5)$, les rebonds auront peut-être l'air \'etranges\ldots Reprendre dans \exoplus \repexo.c l'exercice précédent mais faites en sorte qu'il fonctionne pour n'importe quel vecteur de déplacement.
+\item {\bf Deux carrés qui s'ignorent.} \exoplus \repexo : Idem avec deux clics qui donnent donc deux carrés ; dans un premier temps on peut supposer que les carrés se croisent sans se toucher.
+\item {\bf Choc de carrés.} Améliorez le programme précédent de sorte que les carrés rebondissent l'un sur l'autre quand ils se touchent. Ce n'est pas très réaliste, mais on peut supposer que les carrés repartent en sens inverse quand ils se touchent. Ensuite si vous êtes vraiment en forme vous pouvez essayer de simuler une véritable collision (plus difficile mathématiquement).
+\end{action}
+
+
+\end{document}
