@@ -240,7 +240,7 @@ Dans cette fiche, vous allez réaliser des programmes graphiques en vous aidant 
 \end{lecture}
 
 \begin{action}
-\item {\bf Un pixel blanc.} Dans un nouveau fichier \exoplus \repexo, coloriez en blanc le pixel de coordonnées (150,120) à l'aide de la fonction {\tt changerPixel}.
+\item {\bf Un pixel blanc.} Dans un nouveau fichier \exoplus \repexo, coloriez en blanc le pixel de coordonnées (150,120) à l'aide de la fonction {\tt changerPixel}. Si si, approchez-vous, il est là.
 \item {\bf Pointillés.} On souhaite maintenant allumer en blanc tous les pixels d'ordonnée 50 et d'abscisse paire comprise entre 100 et 200, c'est à dire les pixels de coordonnées {\tt (100,50), (102,50), (104,50), (106,50)}\dots Utilisez une boucle! (vous êtes balaise en boucles maintenant)
 \end{action}
 
@@ -248,17 +248,12 @@ Dans cette fiche, vous allez réaliser des programmes graphiques en vous aidant 
 \begin{action}
 \item {\bf 10 sur 10.} \exoplus On passe à l'\repexo. 
 Dessinez sur l'écran un quadrillage composé de lignes horizontales et de lignes verticales séparées de 10 pixels. Couleurs aux choix...
-\item {\bf C'est vraiment cyan.} \exoplus \repexo : colorez un par un en cyan les pixels de tout l'écran avec {\tt changerPixel}. Vous ne voyez rien? Vous devez probablement appeler {\tt actualiser} (voir la notice).
+\item {\bf C'est vraiment cyan.} \exoplus \repexo : à l'aide de carrés de taille 10x10, coloriez l'écran en cyan avec {\tt dessinerRectangle}. 
 \end{action}
 
-\begin{lecture}
-{\bf Allez y mollo avec {\tt actualiser}}: cette fonction implique un rafraîchissement de tout l'écran, qui est assez coûteux en temps machine. Il est beaucoup plus rapide de n'actualiser qu'une fois toutes les modifications faites.\\
-Si votre exercice précédent est trop lent, c'est très probablement que vous avez placé {\tt actualiser} dans votre double boucle. Essayez de le sortir des boucles et appréciez la différence.
-\end{lecture}
-
 \begin{action}
-\item {\bf Tricolore.} \exoplus \repexo : Colorez un par un les pixels de tout l'écran en alternant entre trois couleurs de votre choix (utiliser l'opérateur modulo \%). Par exemple, les pixels seront vert, jaune, rouge, vert, jaune, rouge, etc. Et quand on revient à la ligne on utilise la couleur qui devrait suivre le dernier point de la ligne précédente. Remarque : 800 n'étant pas divisible par 3, ceci tracera des lignes de couleur qui seront en diagonale et non verticales.
-\item {\bf Tripentacolore.} \exoplus \repexo : idem mais en alternant entre trois couleurs de votre choix tous les cinq pixels( cinq pixels de la première couleur, cinq de la deuxième, etc).
+\item {\bf Tricolore.} \exoplus \repexo : Colorez maintenant vos carrés de taile 10x10 en alternant entre trois couleurs de votre choix (utiliser l'opérateur modulo \%). Par exemple, les carrés seront vert, jaune, rouge, vert, jaune, rouge, etc. Et quand on revient à la ligne on utilise la couleur qui devrait suivre le dernier point de la ligne précédente. Remarque : 800 n'étant pas divisible par 3, ceci tracera des lignes de couleur qui seront en diagonale et non verticales.
+\item {\bf Tripentacolore.} \exoplus \repexo : idem mais en alternant entre trois couleurs de votre choix tous les cinq carrés (cinq carrés de la première couleur, cinq de la deuxième, etc).
 \end{action}
 
 \subsection*{Un peu d'interaction avec l'utilisateur}
