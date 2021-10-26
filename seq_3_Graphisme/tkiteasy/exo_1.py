@@ -1,5 +1,5 @@
 #coding: utf-8
-from libgrapythk import *
+from tkiteasy import *
 
 
 # ouverture de fenêtre
