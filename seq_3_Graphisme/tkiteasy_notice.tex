@@ -156,14 +156,18 @@ année 2021-2022}
 
 
 \newpage 
-\hfill {\it (version 16/10/2021)}
+\hfill {\it (version 28/10/2021)}
 \begin{center}
     \fcolorbox{gray!50}{gray!50}{\Large \tt Notice d'utilisation de la bibliothèque graphique {\tt tkiteasy}}
 \end{center}
 
 {\tt tkiteasy} est une bibliothèque ou librairie "{\it maison}" qui va vous permettre de gérer des graphismes sans nécessiter de vous plonger dans le module {\tt tkinter}. Elle est en fait une interface simple entre vous et ce module {\tt tkinter} qui impose un certain apprentissage.
 
-\section{Ouverture de session graphique et objet graphique}
+\section{Installation de la librairie {\tt tkiteasy}}
+La librairie {\tt tkiteasy} est écrite en {\tt python3}. Elle s'appuie sur la librairie graphique {\tt tkinter}. Elle utilise également la librairie {\tt PIL}, qui permet de gérer des images.\\ 
+Pour utiliser {\tt tkiteasy}, vous devez donc installer les paquets {\tt python3-tk} et {\tt python3-pil}
+
+\section{Ouverture de session graphique et objet Canevas}
 La première méthode (c'est à dire fonction) à utiliser pour pouvoir lancer {\tt tkiteasy} est {\tt ouvrirFenetre(x,y)}, où {\tt x} indique la largeur en pixels de la fenêtre graphique, et où {\tt y} indique sa hauteur. Exemple de lancement d'une session graphique:
 \begin{ccode}
     g = ouvrirFenetre(800,600)
@@ -171,10 +175,10 @@ La première méthode (c'est à dire fonction) à utiliser pour pouvoir lancer {
 On a ici créé une fenêtre de 800 pixels de large sur 600 pixels de haut.\\
 {\bf IMPORTANT: le point de coordonnées {\tt (0,0)} se trouve toujours en haut à gauche de la fenêtre.}\\
 
-L'appel à {\tt ouvrirFenetre} renvoie un {\tt ObjetGraphique} (ici {\tt g}). C'est une variable que vous devez conserver et utiliser tout au long de votre programme. Elle vous permettra de lancer les méthodes graphiques qui sont présentées ci-dessous.
+L'appel à {\tt ouvrirFenetre} renvoie un objet {\tt Canevas} (ici {\tt g}). C'est un objet que vous devez conserver et utiliser tout au long de votre programme. Il vous permettra de lancer les méthodes graphiques qui sont présentées ci-dessous.
 
-\section{Méthodes de {\tt ObjetGraphique}}
-\`A partir du moment où vous disposez d'un {\tt ObjetGraphique}, vous allez pouvoir créez et manipuler toutes sortes de figures géométriques, textes, images dans votre fenêtre graphique. Voici les méthodes permettant de créer ces figures.
+\section{Méthodes du {\tt Canevas}}
+\`A partir du moment où vous disposez d'un {\tt Canevas}, vous allez pouvoir créez et manipuler toutes sortes de figures géométriques, textes, images dans votre fenêtre graphique. Voici les méthodes permettant de créer ces figures.
 
 \subsection*{Création de figures géométriques, images, textes}
 
@@ -221,6 +225,7 @@ Change la couleur de l'objet {\tt obj} en {\tt col}.
 \subsubsection*{\fbox{\tt changerTexte(obj, txt)}}
 Change le texte de l'objet {\tt obj} (nécessairement un objet texte) en {\tt txt}.
 
+\newpage
 \subsection*{Gestion des événements}
 On appelle {\it événement} une interaction entre l'utilisateur et le programme: clic souris, appui touche clavier, déplacement souris.
 
@@ -228,7 +233,12 @@ On appelle {\it événement} une interaction entre l'utilisateur et le programme
 Permet de récupérer la dernière touche pressée au clavier. un objet {\tt obj} vers la position {\tt (x,y)}. La variable renvoyée est une {\it string} qui contient la description de la touche: {\tt "a", "b", "c",}... Elle peut également contenir le nom de certaines touches spéciales (curseurs, touche de fonction...) : {\tt "Right", "Left", "Up", "Down",}...voir la \underline{section dédiée aux touches clavier}. La variable contient {\tt None} si aucune touche n'a été presséei depuis la dernière récupération de touche.
 
 \subsubsection*{\fbox{\tt recupererClic(obj)}}
-Permet de récupérer la position du dernier clic gauche de souris. La variable renvoyée est un {\it tuple} qui contient les coordonnées {\tt (x,y)} du clic, ou {\tt None} si aucun clic n'a eu lieu depuis la dernière récupération de position.
+Permet de récupérer la position du dernier clic gauche de souris. La variable renvoyée est un {\tt ObjetGraphique} (voir la \underline{section dédiée à {\tt ObjetGraphique}}) qui contient des champs {\tt x} et {\tt y}. Ainsi, vous pouvez obtenir les coordonnées du point cliqué de la façon suivante:
+\begin{ccode}
+    p = g.recupererClic()
+    print(p.x, p.y)
+\end{ccode}
+Si aucun clic n'a eu lieu depuis la dernière récupération de position, la méthode renvoie {\tt None}.
 
 \subsubsection*{\fbox{\tt recupererPosition()}}
 Permet de récupérer la dernière position de souris suite à un déplacement de souris. La variable renvoyée est un {\it tuple} qui contient les coordonnées {\tt (x,y)} de la souris, ou {\tt (0,0)} si aucun déplacement n'a eu lieu depuis le lancement du programme.
@@ -249,16 +259,23 @@ Parfois, le programme crée se déroule trop rapidement et nécessite d'être ra
 \subsubsection*{\fbox{\tt fermerFenetre()}}
 Ferme la fenêtre graphique.
 
-
-
-\subsection*{Les couleurs}
-Il existe deux façons d'indiquer une couleur:
+\section{{\tt ObjetGraphique}}
+Toutes les méthodes qui créent des objets graphiques (rectangle, disque, image...etc) renvoient un {\tt ObjetGraphique}. Cet {\tt ObjetGraphique} contient trois champs utiles si vous souhaitez récupérer certaines informations concernant cet objet:
 \begin{itemize}
-  \item par son code RVB sous la forme hexadécimale: {\tt \#rrvvbb} où {\tt rr,vv,bb} sont les composantes rouges, vertes et bleues de la couleur souhaitée. Exemple: {\tt \#ff0000} indique le rouge.
-  \item par une {\it string} prédéfinie. Les couleurs {\tt 'white', 'black', 'red', 'green', 'blue', 'cyan', 'yellow'}, et {\tt 'magenta'} sont toujours disponibles. De nombreuses autres couleurs le sont également, en fonction de la configuration locale de votre ordinateur. Faites des tentatives: {\tt "pink", "gold",}...
+  \item {\tt x} et {\tt y}, qui contiennent les coordonnées actuelles de l'objet
+  \item {\tt col}, qui contient sa couleur
 \end{itemize}
 
-\subsection*{Les touches clavier}
+\section{Les couleurs}
+Il existe deux façons d'indiquer une couleur:
+\begin{itemize}
+  \item par son code RVB sous la forme hexadécimale: {\tt \#rrvvbb} où {\tt rr,vv,bb} sont les composantes rouges, vertes et bleues de la couleur souhaitée. Exemple: {\tt \#ff0000} indique le rouge.\\ 
+  {\bf ATTENTION}: cet hexadécimal doit être transmis sous forme de {\tt string}.\\
+  Exemple: {\tt dessinerCercle(x,y,r,"#ff00ab")}
+  \item par une {\tt string} prédéfinie. Les couleurs {\tt 'white', 'black', 'red', 'green', 'blue', 'cyan', 'yellow'}, et {\tt 'magenta'} sont toujours disponibles. De nombreuses autres couleurs le sont également, en fonction de la configuration locale de votre ordinateur. Faites des tentatives: {\tt "pink", "gold",}...
+\end{itemize}
+
+\section{Les touches clavier}
 \begin{tabular}{ll}
 {\tt Return} 	& 	La touche Entrée\\
 {\tt space} 	& 	La barre espace\\
@@ -309,4 +326,5 @@ Il existe deux façons d'indiquer une couleur:
 {\tt KP\_Home} 	& 	Début sur le clavier numérique\\
 {\tt KP\_Insert} 	& 	Insert sur le clavier numérique\\
 \end{tabular}{}
+
 \end{document}
