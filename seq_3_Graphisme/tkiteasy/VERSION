@@ -1,3 +1,10 @@
+4.2 9/11
+Erreur dans la doc pour la méthode deplacer()
+
+4.1 28/10
+Changement des noms des classes
+Correctif de la doc (couleurs hexa, champs de ObjetGraphique, paquets pour install)
+
 4
 Camel Case
 Ajout de l'option sizefont à afficherTexte
