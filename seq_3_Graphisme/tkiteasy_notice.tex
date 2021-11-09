@@ -156,7 +156,7 @@ année 2021-2022}
 
 
 \newpage 
-\hfill {\it (version 28/10/2021)}
+\hfill {\it (version 9/11/2021)}
 \begin{center}
     \fcolorbox{gray!50}{gray!50}{\Large \tt Notice d'utilisation de la bibliothèque graphique {\tt tkiteasy}}
 \end{center}
@@ -207,13 +207,13 @@ Affiche une image en position {\tt (x,y)}, provenant du fichier {\tt filename}. 
 
 \subsection*{Méthodes de modification d'objets existants}
 Les méthodes qui suivent permettent de modifier un objet existant: changer ses caractéristiques (couleur, texte), le déplacer ou le supprimer. Pour ce faire, vous devez avoir conservé une référence à l'objet créé, au moment de sa création. Voir exemple ci-dessous.
-\subsubsection*{\fbox{\tt deplacer(obj, x, y)}}
-Permet de déplacer un objet {\tt obj} vers la position {\tt (x,y)}.\\
+\subsubsection*{\fbox{\tt deplacer(obj, dx, dy)}}
+Permet de déplacer un objet {\tt obj} de {\tt dx} pixels horizontalement et {\tt dy} pixels verticalement.\\
 Exemple:
 \begin{ccode}
     c = g.dessinerCercle(800,600,10,"pink") # c contient une référence au cercle créé
     # plus tard dans le programme...
-    g.deplacer(c, 10, 10) # ...on peut déplacer le cercle en utilisant cette référence
+    g.deplacer(c, 10, 0) # ...on déplace le cercle de 10 pixels vers la droite en utilisant cette référence
 \end{ccode}
 
 \subsubsection*{\fbox{\tt supprimer(obj)}}
