@@ -178,7 +178,8 @@ On a ici créé une fenêtre de 800 pixels de large sur 600 pixels de haut.\\
 L'appel à {\tt ouvrirFenetre} renvoie un objet {\tt Canevas} (ici {\tt g}). C'est un objet que vous devez conserver et utiliser tout au long de votre programme. Il vous permettra de lancer les méthodes graphiques qui sont présentées ci-dessous.
 
 \section{Méthodes du {\tt Canevas}}
-\`A partir du moment où vous disposez d'un {\tt Canevas}, vous allez pouvoir créez et manipuler toutes sortes de figures géométriques, textes, images dans votre fenêtre graphique. Voici les méthodes permettant de créer ces figures.
+\`A partir du moment où vous disposez d'un {\tt Canevas}, vous allez pouvoir créez et manipuler toutes sortes de figures géométriques, textes, images dans votre fenêtre graphique. Voici les méthodes permettant de créer ces figures.\\
+Le fichier {\tt main.py} fourni avec {\tt tkiteasy} vous montre comment manipuler ces objets graphiques et lancer les différentes méthodes de la librairie.
 
 \subsection*{Création de figures géométriques, images, textes}
 
@@ -232,16 +233,22 @@ On appelle {\it événement} une interaction entre l'utilisateur et le programme
 \subsubsection*{\fbox{\tt recupererTouche()}}
 Permet de récupérer la dernière touche pressée au clavier. un objet {\tt obj} vers la position {\tt (x,y)}. La variable renvoyée est une {\it string} qui contient la description de la touche: {\tt "a", "b", "c",}... Elle peut également contenir le nom de certaines touches spéciales (curseurs, touche de fonction...) : {\tt "Right", "Left", "Up", "Down",}...voir la \underline{section dédiée aux touches clavier}. La variable contient {\tt None} si aucune touche n'a été presséei depuis la dernière récupération de touche.
 
-\subsubsection*{\fbox{\tt recupererClic(obj)}}
-Permet de récupérer la position du dernier clic gauche de souris. La variable renvoyée est un {\tt ObjetGraphique} (voir la \underline{section dédiée à {\tt ObjetGraphique}}) qui contient des champs {\tt x} et {\tt y}. Ainsi, vous pouvez obtenir les coordonnées du point cliqué de la façon suivante:
+\subsubsection*{\fbox{\tt attendreTouche()}}
+Même fonctionnement que la méthode précédente, mais la fonction est bloquante: elle bloque le programme et attend une touche.
+
+\subsubsection*{\fbox{\tt recupererClic()}}
+Permet de récupérer la position du dernier clic gauche de souris. La variable renvoyée est un {\tt Event} qui contient des champs {\tt x} et {\tt y}. Ainsi, vous pouvez obtenir les coordonnées du point cliqué de la façon suivante:
 \begin{ccode}
     p = g.recupererClic()
     print(p.x, p.y)
 \end{ccode}
-Si aucun clic n'a eu lieu depuis la dernière récupération de position, la méthode renvoie {\tt None}.
+Si aucun clic n'a eu lieu depuis la dernière récupération de position, la méthode renvoie {\tt None}. Un champ {\tt num} permet également de tester quel bouton a été cliqué: {\tt num=1} pour le bouton gauche, {\tt num=3} pour le bouton droit.
+
+\subsubsection*{\fbox{\tt attendreClic()}}
+Même fonctionnement que la méthode précédente, mais la fonction est bloquante: elle bloque le programme et attend le clic.
 
 \subsubsection*{\fbox{\tt recupererPosition()}}
-Permet de récupérer la dernière position de souris suite à un déplacement de souris. La variable renvoyée est un {\it tuple} qui contient les coordonnées {\tt (x,y)} de la souris, ou {\tt (0,0)} si aucun déplacement n'a eu lieu depuis le lancement du programme.
+Permet de récupérer la dernière position de souris suite à un déplacement de souris. La variable renvoyée est un {\tt Event} qui contient des champs {\tt x} et {\tt y}: les coordonnées {\tt (x,y)} de la souris, ou {\tt (0,0)} si aucun déplacement n'a eu lieu depuis le lancement du programme.
 
 
 \subsection*{Autres fonctions}

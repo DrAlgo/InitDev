@@ -1,3 +1,8 @@
+4.3 10/11
+Ajout attendreClic()
+Ajout attendreTouche()
+Gestion du clic droit dans recupererClic*()
+
 4.2 9/11
 Erreur dans la doc pour la méthode deplacer()
 
