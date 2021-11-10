@@ -17,15 +17,15 @@ class ObjetGraphique():
 
 
 ################################################################################
-# classe Graphique
+# classe Canevas
 ################################################################################
-class Graphique(tk.Canvas):
+class Canevas(tk.Canvas):
     def __init__(self, master, largeur,hauteur):
         tk.Canvas.__init__(self, master, width=largeur, height=hauteur, bg="black", confine=True)
 # attributs
         self.master = master #la fenêtre hébergeant le canvas
         self.img = {} #pour stocker les images sinon elles sont garbagecollectées dès leur création lol
-        self.obj = {}
+#         self.obj = {}
         self.lastkey = None #dernière touche tapée
         self.lastclic = None #dernier clic cliqué
         self.lastpos = 0,0 #dernière pos souris
@@ -33,6 +33,7 @@ class Graphique(tk.Canvas):
 # bindings
         self.bind_all("<Key>", self.evenementClavier)
         self.bind("<Button-1>", self.evenementClicG)
+        self.bind("<Button-3>", self.evenementClicD)
         self.bind("<Motion>", self.evenementDeplaceSouris)
         self.pack()
 
@@ -56,8 +57,8 @@ class Graphique(tk.Canvas):
     def dessinerDisque(self, x, y, r, col):
         return ObjetGraphique(self.create_oval(x-r, y-r, x+r, y+r, width=0, fill=col), x, y, col)
 
-    def changerPixel(self, x, y, col):
-        return ObjetGraphique(self.dessinerRectangle(x,y,1,1,col), x, y, col)
+#     def changerPixel(self, x, y, col):
+#         return ObjetGraphique(self.dessinerRectangle(x,y,1,1,col), x, y, col)
 
     def afficherImage(self, x, y, filename):
         image = Image.open(filename)
@@ -92,12 +93,17 @@ class Graphique(tk.Canvas):
 # EVENEMENTS
 ################################################################################
     def evenementClicG(self, event):
-        if event!=self.lastclic:
+#         if event!=self.lastclic:
+#             print("Mouse", event)
+            self.lastclic = event
+
+    def evenementClicD(self, event):
+#         if event!=self.lastclic:
 #             print("Mouse", event)
             self.lastclic = event
 
     def evenementClavier(self, event):
-        if event.keysym != self.lastkey:
+#         if event.keysym != self.lastkey:
 #             print("Keyboard",event.keysym)#event, event.char)
             self.lastkey=event.keysym
 
@@ -113,11 +119,25 @@ class Graphique(tk.Canvas):
         self.lastkey = None
         return touche
 
+    def attendreTouche(self):
+        touche = None
+        while touche == None:
+            self.pause(0.1)
+            touche = self.recupererTouche()
+        return touche
+
     def recupererClic(self):
         self.master.focus_force()
         self.update()
         clic = self.lastclic
         self.lastclic = None
+        return clic
+
+    def attendreClic(self):
+        clic = None
+        while clic==None:
+            self.pause(0.1)
+            clic = self.recupererClic()
         return clic
 
     def recupererPosition(self):
@@ -143,7 +163,7 @@ class Graphique(tk.Canvas):
 def ouvrirFenetre(x=400, y=200):
     racine = tk.Tk()
     #racine.protocol("WM_DELETE_WINDOW", qtk.quad.master.destroy)
-    g = Graphique(racine, x, y)
+    g = Canevas(racine, x, y)
 #     tk.mainloop()
     return g
 
