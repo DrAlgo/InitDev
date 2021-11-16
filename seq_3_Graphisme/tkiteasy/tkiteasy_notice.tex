@@ -156,7 +156,7 @@ année 2021-2022}
 
 
 \newpage 
-\hfill {\it (version 10/11/2021)}
+\hfill {\it (version 16/11/2021)}
 \begin{center}
     \fcolorbox{gray!50}{gray!50}{\Large \tt Notice d'utilisation de la bibliothèque graphique {\tt tkiteasy}}
 \end{center}
@@ -230,7 +230,7 @@ Change le texte de l'objet {\tt obj} (nécessairement un objet texte) en {\tt tx
 On appelle {\it événement} une interaction entre l'utilisateur et le programme: clic souris, appui touche clavier, déplacement souris.
 
 \subsubsection*{\fbox{\tt recupererTouche()}}
-Permet de récupérer la dernière touche pressée au clavier. un objet {\tt obj} vers la position {\tt (x,y)}. La variable renvoyée est une {\it string} qui contient la description de la touche: {\tt "a", "b", "c",}... Elle peut également contenir le nom de certaines touches spéciales (curseurs, touche de fonction...) : {\tt "Right", "Left", "Up", "Down",}...voir la \underline{section dédiée aux touches clavier}. La variable contient {\tt None} si aucune touche n'a été presséei depuis la dernière récupération de touche.
+Permet de récupérer la dernière touche pressée au clavier. La variable renvoyée est une {\it string} qui contient la description de la touche: {\tt "a", "b", "c",}... Elle peut également contenir le nom de certaines touches spéciales (curseurs, touche de fonction...) : {\tt "Right", "Left", "Up", "Down",}...voir la \underline{section dédiée aux touches clavier}. La variable contient {\tt None} si aucune touche n'a été presséei depuis la dernière récupération de touche.
 
 \subsubsection*{\fbox{\tt attendreTouche()}}
 Même fonctionnement que la méthode précédente (renvoie la touche cliquée), mais la fonction est bloquante: elle bloque le programme et attend une touche.
