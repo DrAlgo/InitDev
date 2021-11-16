@@ -229,22 +229,22 @@ Change le texte de l'objet {\tt obj} (nécessairement un objet texte) en {\tt tx
 \subsection*{Gestion des événements}
 On appelle {\it événement} une interaction entre l'utilisateur et le programme: clic souris, appui touche clavier, déplacement souris.
 
-\subsubsection*{\fbox{\tt recupererTouche()}}
-Permet de récupérer la dernière touche pressée au clavier. La variable renvoyée est une {\it string} qui contient la description de la touche: {\tt "a", "b", "c",}... Elle peut également contenir le nom de certaines touches spéciales (curseurs, touche de fonction...) : {\tt "Right", "Left", "Up", "Down",}...voir la \underline{section dédiée aux touches clavier}. La variable contient {\tt None} si aucune touche n'a été presséei depuis la dernière récupération de touche.
-
 \subsubsection*{\fbox{\tt attendreTouche()}}
-Même fonctionnement que la méthode précédente (renvoie la touche cliquée), mais la fonction est bloquante: elle bloque le programme et attend une touche.
+Attend qu'une touche soit pressée au clavier. La variable renvoyée est une {\it string} qui contient la description de la touche: {\tt "a", "b", "c",}... Elle peut également contenir le nom de certaines touches spéciales (curseurs, touche de fonction...) : {\tt "Right", "Left", "Up", "Down",}...voir la \underline{section dédiée aux touches clavier}. La variable contient {\tt None} si aucune touche n'a été presséei depuis la dernière récupération de touche.
 
-\subsubsection*{\fbox{\tt recupererClic()}}
-Permet de récupérer la position du dernier clic gauche de souris. La variable renvoyée est un {\tt Event} qui contient des champs {\tt x} et {\tt y}. Ainsi, vous pouvez obtenir les coordonnées du point cliqué de la façon suivante:
-\begin{ccode}
-    p = g.recupererClic()
-    print(p.x, p.y)
-\end{ccode}
-Si aucun clic n'a eu lieu depuis la dernière récupération de position, la méthode renvoie {\tt None}. Un champ {\tt num} permet également de tester quel bouton a été cliqué: {\tt num=1} pour le bouton gauche, {\tt num=3} pour le bouton droit.
+\subsubsection*{\fbox{\tt recupererTouche()}}
+Même fonctionnement que la méthode précédente (renvoie la touche cliquée), mais la fonction est non bloquante: elle renvoie la dernière touche pressée sans bloquer le déroulement du programme. Elle renvoie  {\tt None} si aucune touche n'a été pressée depuis la dernière récupération de touche.
 
 \subsubsection*{\fbox{\tt attendreClic()}}
-Même fonctionnement que la méthode précédente (renvoie la position cliquée), mais la fonction est bloquante: elle bloque le programme et attend le clic.
+Attend qu'un bouton souris soit préssé.  La variable renvoyée est un {\tt Event} qui contient des champs {\tt x} et {\tt y}. Ainsi, vous pouvez obtenir les coordonnées du point cliqué de la façon suivante:
+\begin{ccode}
+    p = g.attendreClic()
+    print(p.x, p.y)
+\end{ccode}
+Un champ {\tt num} permet également de tester quel bouton a été cliqué: {\tt num=1} pour le bouton gauche, {\tt num=3} pour le bouton droit.
+
+\subsubsection*{\fbox{\tt recupererClic()}}
+Même fonctionnement que la méthode précédente (renvoie la position cliquée), mais la fonction est non bloquante: elle renvoie la dernière position cliquée sans bloquer le déroulement du programme.  Si aucun clic n'a eu lieu depuis la dernière récupération de position, la méthode renvoie {\tt None}. 
 
 \subsubsection*{\fbox{\tt recupererPosition()}}
 Permet de récupérer la dernière position de souris suite à un déplacement de souris. La variable renvoyée est un {\tt Event} qui contient des champs {\tt x} et {\tt y}: les coordonnées {\tt (x,y)} de la souris, ou {\tt (0,0)} si aucun déplacement n'a eu lieu depuis le lancement du programme.
