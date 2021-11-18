@@ -34,6 +34,21 @@ class CanevasGrille(Canevas):
         self.changerCouleur(self.carres[i][j], col)
         self.col_carres[i][j] = col
 
+    def dessinerFleche(self, i1, j1, i2, j2):
+        """
+        dessine une fleche qui part du carré i1,j1 jusqu'au carré i2,j2
+        """
+        d = int(self.COTE_CARRE/10) #separation des carres
+        x1 = int(d + (i1+0.5)*self.COTE_CARRE)
+        y1 = int(d + (j1+0.5)*self.COTE_CARRE)
+        x2 = int(d + (i2+0.5)*self.COTE_CARRE)
+        y2 = int(d + (j2+0.5)*self.COTE_CARRE)
+        l = self.create_line(x1,y1,x2,y2,fill="red",arrow="last", width=5, arrowshape=(20,20,5))
+        return ObjetGraphique(l, x1, y1, "red")
+
+
+
+
     def get_couleur(self, i,j):
         """
         renvoie la couleur du carré (i,j)
