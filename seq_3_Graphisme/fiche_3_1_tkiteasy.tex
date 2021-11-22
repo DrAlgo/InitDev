@@ -248,12 +248,13 @@ Dans cette fiche, vous allez réaliser des programmes graphiques à l'aide de la
 \begin{action}
 \item {\bf 10 sur 10.} \exoplus On passe à l'\repexo. 
 Dessinez sur l'écran un quadrillage composé de lignes horizontales et de lignes verticales séparées de 10 pixels. Couleurs aux choix...
-\item {\bf C'est vraiment cyan.} \exoplus \repexo : à l'aide de carrés de taille 10x10, coloriez l'écran en cyan avec {\tt dessinerRectangle}. 
+\item {\bf C'est vraiment cyan.} \exoplus \repexo : à l'aide de carrés de taille 10x10, coloriez {\bf horizontalement} (ligne par ligne) l'écran en cyan avec {\tt dessinerRectangle}. 
 \end{action}
 
 \begin{action}
-\item {\bf Tricolore.} \exoplus \repexo : Colorez maintenant vos carrés de taile 10x10 en alternant entre trois couleurs de votre choix (utiliser l'opérateur modulo \%). Par exemple, les carrés seront vert, jaune, rouge, vert, jaune, rouge, etc. Et quand on revient à la ligne on utilise la couleur qui devrait suivre le dernier point de la ligne précédente. Remarque : 800 n'étant pas divisible par 3, ceci tracera des lignes de couleur qui seront en diagonale et non verticales.
+\item {\bf Tricolore.} \exoplus \repexo : Reprenez l'exercice précédent et colorez maintenant vos carrés de taile 10x10 en alternant entre trois couleurs de votre choix (utiliser l'opérateur modulo \%). Par exemple, les carrés seront vert, jaune, rouge, vert, jaune, rouge, etc. Et quand on revient à la ligne on utilise la couleur qui devrait suivre le dernier point de la ligne précédente. Remarque : 800 n'étant pas divisible par 3, ceci tracera des lignes de couleur qui seront en diagonale et non verticales.
 \item {\bf Tripentacolore.} \exoplus \repexo : idem mais en alternant entre trois couleurs de votre choix tous les cinq carrés (cinq carrés de la première couleur, cinq de la deuxième, etc).
+\item {\bf Damier}
 \end{action}
 
 \subsection*{Un peu d'interaction avec l'utilisateur}
@@ -281,7 +282,7 @@ Dessinez sur l'écran un quadrillage composé de lignes horizontales et de ligne
 \item {\bf Le terrain de jeu et le joueur. }\exoplus \repexo : Dessinez un quadrillage de l'écran par des lignes séparées de 20 pixels (reprenez et modifiez le code de l'{\tt exo_3}). Faites en sorte que lorsque l'utilisateur clique dans un carré, l'intérieur de celui-ci devienne rouge. {\bf Attention}, le rouge ne doit pas déborder sur le quadrillage ni laisser d'espace vide.\\
 {\bf De l'aide?} Quand on clique dans un carré, vous récupérez une position qui n'est généralement pas le coin haut-gauche dont vous avez besoin pour dessiner ce carré. Il vous faut alors effectuer un calcul afin d'obtenir cette position. Il se pourrait que le modulo vous soit utile\dots
 \item {\bf Déplacement du joueur.} Modifiez ce programme de sorte que l'utilisateur puisse \og sélectionner \fg un carré et changer d'avis : lorsqu'il clique dans un carré, celui-ci devient rouge, mais s'il clique dans un autre carré, le carré précédent disparait et le nouveau devient rouge, ceci 10 fois de suite.\\
-\item {\bf Un terrain plus joli.} \exoplus \repexo : Même exercice que le précédent, mais plutôt qu'un quadrillage, l'écran est un damier constitué de carrés verts et bleus de côté 20. Chaque carré doit reprendre sa couleur de départ quand on en sélectionne un autre. \\
+\item {\bf Un terrain plus joli.} \exoplus \repexo : Même exercice que le précédent, mais plutôt qu'un quadrillage, l'écran est un damier constitué de carrés verts et bleus de côté 20. Le damier doit être correct {\bf quels que soient la taille de l'écran et des cases}: chaque ligne démarre avec une couleur différente. Chaque carré doit reprendre sa couleur de départ quand on en sélectionne un autre. \\
 \item {\bf Sélection du voisinage.} \exoplus \repexo : Comme l'exercice précédent, mais maintenant l'utilisateur ne peut choisir qu'un des carrés voisins (diagonale possible). Si l'utilisateur clique dans un carré non voisin alors rien ne se passe.
 \item {\bf Le très horrible monstre jaune.} Ajoutez un carré de couleur jaune qui apparaît dès le lancement du programme sur une position aléatoire du damier. Ensuite, quand votre joueur rouge se déplace, il lui est impossible d'aller sur la case jaune.
 \item {\bf Le jeu!} \repexo:  Tout est en place, ne reste qu'à lancer la mécanique: à chaque fois que le joueur rouge se déplace dans son voisinage, le monstre se déplace également automatiquement d'une case \emph{vers le joueur} (au moins de façon à se rapprocher). Si après son mouvement le monstre est sur la case du  joueur, le programme s'arrête et le joueur a perdu.
