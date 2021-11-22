@@ -209,7 +209,7 @@ d'obtenir un empilement de droite à gauche, suivit d'une seconde ligne de gauch
 \item {\bf remplissage - \tt empilements7 } La fonction {\tt f0} de l'exercice précédent, dans sa première version permettait de remplir
 toute une ligne. Pouvez-vous créer une deuxième fonction qui va appeler {\tt f0} pour remplir une ligne, 
 puis qui va s'appeler elle-même afin de remplir la ligne du-dessus ? Si cela fonctionne, tout l'écran sera rempli par récurrence.
-Attention, il faut s'arrêter à un moment quand les lignes deviennent trop hautes (vous pouvez avoir besoin d'un compteur).
+Attention, il faut s'arrêter à un moment quand les lignes deviennent trop hautes (vous pouvez avoir besoin d'un compteur passé en paramètre).
 \end{action}
 
 
@@ -222,13 +222,16 @@ qui consiste en général à partir d'un endroit précis et d'explorer de proche
 \begin{action}
 \item {\bf démonstration - \tt demo\_grille2.mp4} visualiser le film {\tt demo\_grille2.mp4} afin de voir concrètement l'objectif de cette partie.
 \end{action}
-
+\begin{icone}{img/lecture.jpg}
 Il s'agit d'une version préliminaire des algorithmes de plus court chemin. Dans cette version, Pacman se trouve dans un environnement 2D
 où il peut se déplacer dans 4 directions, et ne peut pas traverser les murs (cases noires). L'objectif est de déterminer l'ensemble
 des cases auxquelles Pacman peut accéder, en visualisant de plus les appels récursifs par des flèches.
+\end{icone}
+
+
 
 \begin{action}
-\item {\bf tuto de l'API - \tt grille0} lisez le code de {\tt grill0.py} et exécutez. Attention surveillez aussi le terminal. Le but
+\item {\bf tuto de l'API - \tt grille0.} lisez le code de {\tt grille0.py} et exécutez. Attention surveillez aussi le terminal. Le but
 est de comprendre l'interface qui sera utilisée ensuite.
 \item {\bf première tentative - \tt grille1} Même chose, sauf qu'ici on fait se déplacer pacman jusqu'à ce qu'il rencontre une case non valide.
 Essayez de modifier ce code pour que tout se passe comme dans le film {\tt demo\_grille1.py}.

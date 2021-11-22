@@ -27,7 +27,7 @@ class CanevasGrille(Canevas):
         self.pacman_pos = None
         self.pacman_h = None
 
-    def changer_carre(self,i,j,col):
+    def changerCarre(self,i,j,col):
         """
         change la couleur du carré (i,j)
         """
@@ -49,7 +49,7 @@ class CanevasGrille(Canevas):
 
 
 
-    def get_couleur(self, i,j):
+    def getCouleur(self, i,j):
         """
         renvoie la couleur du carré (i,j)
         """

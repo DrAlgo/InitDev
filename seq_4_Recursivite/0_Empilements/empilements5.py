@@ -7,12 +7,16 @@ nbCubesX = g.NB_CUBES_X
 
 #définition d'une fonction récursive
 def f0(g, pos):
+    """empile un cube sur la position, si possible
+    puis appelle pour empiler sur la position suivante"""
 
-    g.empilerCube(pos,"green")
+    #condition d'arrêt
+    if pos >= nbCubesX:
+        return
 
-    #appel récursif ! (on teste pour ne pas sortir)
-    if pos + 1 < nbCubesX:
-        f0(g, pos + 1)
+    #sinon
+    g.empilerCube(pos,"green")   # empilement
+    f0(g, pos + 1)               # appel récursif
     
 f0(g,0)
 
