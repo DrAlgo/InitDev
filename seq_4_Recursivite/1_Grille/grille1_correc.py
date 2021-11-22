@@ -19,20 +19,29 @@ dx, dy = 0, 1 # deplacement de pacman
 g.placer_pacman(px,py)
 g.changerCarre(px,py,"blue")
 
-
+g.attendreClic()
 running = True
+dir_testees = 0
 while running:
+    if dir_testees==4:
+        running = False
+        break
     vx = px + dx #case voisine
     vy = py + dy
-    if g.case_valide(vx,vy):
+    print(px,py,vx,vy)
+    if g.case_valide(vx,vy) and g.getCouleur(vx,vy) == "gray":
+        dir_testees = 0
+        #fleche
+        g.dessinerFleche(px,py,vx,vy)
         #on deplace pacman
         px = vx
         py = vy
         g.placer_pacman(px,py)
         g.changerCarre(px,py,"blue")
-        g.pause(0.5)
-    else:
-        running = False
+        g.pause(0.2)
+    else: #on cherche une autre direction
+        dx,dy = dy, -dx
+        dir_testees +=1
 
 
 #fin du programme

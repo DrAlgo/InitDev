@@ -168,7 +168,7 @@ IUT de Vélizy\\
 
 \thispagestyle{empty}
 
-
+\setcounter{section}{-1}
 \section{Empilements}
 
 \begin{action}
@@ -210,6 +210,103 @@ d'obtenir un empilement de droite à gauche, suivit d'une seconde ligne de gauch
 toute une ligne. Pouvez-vous créer une deuxième fonction qui va appeler {\tt f0} pour remplir une ligne, 
 puis qui va s'appeler elle-même afin de remplir la ligne du-dessus ? Si cela fonctionne, tout l'écran sera rempli par récurrence.
 Attention, il faut s'arrêter à un moment quand les lignes deviennent trop hautes (vous pouvez avoir besoin d'un compteur).
+\end{action}
+
+
+\section{Exploration-Diffusion}
+
+Dans ce nouvel environnement graphique, nous allons étudier le concept de diffusion ou d'exploration, 
+qui consiste en général à partir d'un endroit précis et d'explorer de proche en proche tous les endroits accessibles.
+
+
+\begin{action}
+\item {\bf démonstration - \tt demo\_grille2.mp4} visualiser le film {\tt demo\_grille2.mp4} afin de voir concrètement l'objectif de cette partie.
+\end{action}
+
+Il s'agit d'une version préliminaire des algorithmes de plus court chemin. Dans cette version, Pacman se trouve dans un environnement 2D
+où il peut se déplacer dans 4 directions, et ne peut pas traverser les murs (cases noires). L'objectif est de déterminer l'ensemble
+des cases auxquelles Pacman peut accéder, en visualisant de plus les appels récursifs par des flèches.
+
+\begin{action}
+\item {\bf tuto de l'API - \tt grille0} lisez le code de {\tt grill0.py} et exécutez. Attention surveillez aussi le terminal. Le but
+est de comprendre l'interface qui sera utilisée ensuite.
+\item {\bf première tentative - \tt grille1} Même chose, sauf qu'ici on fait se déplacer pacman jusqu'à ce qu'il rencontre une case non valide.
+Essayez de modifier ce code pour que tout se passe comme dans le film {\tt demo\_grille1.py}.
+\begin{itemize}
+    \item lorsque Pacman se déplace, on marque son déplacement avec une flèche rouge.
+    \item lorsque Pacman rencontre un obstacle, il essaie de repartir dans une autre direction. Indication : on peut faire
+    {\tt dx, dy = dy, -dx} pour effectuer un quart de tour sur la direction !
+    \item Si toutes les directions sont bloquées car soit déjà explorées (couleur "blue") ou invalides, alors le programme se termine.
+\end{itemize}
+\item {\bf version récursive - \tt grille2} Finalement, la technique ci-dessus a clairement ses limites : Pacman peut se retrouver bloqué et 
+il faut trouver le moyen de "repartir en arrière". C'est là qu'intervient la récursivité et la pile d'appels (ou pile de récursivité)
+fait ce travail pour nous. Complétez la fonction {\tt exploration} qui se trouve dans le fichier grille2. La spécification de la fonction
+donne les instructions à suivre.
+\end{action}
+
+\section{Exercices non graphiques}
+
+\begin{icone}{img/lecture.jpg}
+  Après le déroulement graphique passionant des deux parties précédentes, vous avez développé une intuition solide
+  du déroulement d'une fonction récursive. Les exercices qui suivent, plus classiques, sont à traiter
+  dans des scripts python sans sortie graphique (terminal uniquement). Vous pouvez également utiliser {\tt jupyter}.
+\end{icone}
+
+
+\begin{action}
+
+  
+\item
+  \'Ecrire une fonction récursive qui renvoie la somme des entiers $0 ^2 + 1^2 +
+  \dots + n^2$, l'entier $n$ étant donné en paramètre (sans utiliser de formule).
+
+\item
+\'Ecrire une fonction récursive qui renvoie un booléen indiquant si les éléments
+d'un tableau d'entier sont tous positifs.\\
+On pourra écrire une fonction de prototype {\tt tout\_positif(tab, debut=0)}
+et qui renvoie un booléen qui indique si tous les éléments de {\tt tab}
+sont positifs depuis l'indice {\tt debut} jusqu'à la fin.
+
+\item
+\'Ecrire une fonction récursive qui cherche un élément dans un tableau. Même
+principe que pour l'exercice précédent.\\
+
+\item
+\'Ecrire une fonction récursive qui cherche un entier dans un tableau {\bf trié} d'entiers
+par recherche dichotomique.\\
+
+
+\item
+\'Ecrire une fonction récursive calculant les termes de la suite de Fibonacci 1 1 2 3 5 8 13 21 34 ... Cette fonction est-elle efficace en termes de complexité algorithmique ? Comment l'améliorer ?
+
+\item On considère un tableau 2D rectangulaire composé de 'v' et de 'm'. Les 'v' représentent des cases
+  vides et les 'm' représentent des murs. On imagine un personnage
+  qui peut se déplacer dans les quatre directions principales du tableau
+  mais ne peut pas franchir les murs.
+
+  \'Ecrire une fonction utilisant la récursivité qui calcule, étant données les
+  coordonnées
+  d'une case 'v' initiale, quels sont les cases où peut se rendre le personnage
+  et celles qui sont hors de portée.
+
+  La fonction renvoie la réponse sous la forme d'un nouveau tableau 2D contenant
+  des booléens dans chaque case indiquant si elles sont accessibles.
+
+\item \'Ecrire une fonction qui génère toutes les chaînes de caractères
+de longueur $k$ (par exemple, les mots de passe !) que l'on peut
+écrire étant donné une liste de
+caractères de la forme {\tt caracteres = ['a','c','x',...]}.
+
+\item (*) \'Ecrire une fonction récursive qui renvoie la liste de toutes les suites
+  strictements
+  croissantes de longueur $k$ composées d'entiers de $1$ à $n$.
+
+  Exemple : Si $k=3$ et $n=5$ la fonction doit renvoyer (éventuellement dans un
+  autre ordre)
+  
+\[ [[1,2,3], [1,2,4], [1,2,5], [1,3,4], [1,3,5], [1,4,5], [2,3,4], [2,3,5],
+  [2,4,5], [3,4,5] ] \]
+
 \end{action}
 
 
