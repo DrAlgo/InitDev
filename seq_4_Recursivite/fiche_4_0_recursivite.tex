@@ -179,13 +179,14 @@ Modifiez librement le script en ajoutant des cubes supplémentaires empilés ave
 \item {\bf Trois fonctions - \tt empilements1.} Ce script définit trois fonctions qui s'appellent entre elles. L'objectif ici
 est de comprendre en regardant le code pourquoi les cubes tombent exactement dans cet ordre et sur ces positions.
 \item {\bf Sans tricher ! - \tt empilements2.} Si vous avez compris, essayez de prévoir 
-dans quel ordre et à quels endroits vont tomber les cubes si l'ont fait l'appel de fonction {\tt fa(g,2)} (il faut l'ajouter). Prenez un papier et essayez
+dans quel ordre et à quels endroits vont tomber les cubes si l'on fait l'appel de fonction {\tt fa(g,2)} (il faut l'ajouter). Prenez un papier et essayez
 de noter dans quel ordre tombent les cubes, sur quel emplacement et avec quelle couleur ! Si vous vous êtes trompé, 
 ce n'est pas grave mais essayez de comprendre pourquoi !
 \item {\bf Cette fois-ci, vraiment sans tricher ! - \tt empilements3.} Même exercice si l'on ajoute dans ce script l'appel de fonction {\tt fA(g,2)}.
 \item {\bf Chassé-croisé - \tt empilements4.}  Essayez de prévoir ce que va faire l'appel {\tt f0(g,0)}.
 \item {\bf suite - \tt empilements4.} A la fin de la fonction {\tt f0}, ajoutez l'empilement d'un cube rouge sur la même
 position que le cube bleu. Comment et dans quel ordre cela va-t'il se passer ?
+\item {\bf Valideycheun} Appelez l'enseignant.e afin de valider ce que vous avez compris des 4 exercices précédents.
 \end{action}
 
 \begin{icone}{img/lecture.jpg}
@@ -205,7 +206,7 @@ appelle la fonction {\tt f0} dans son propre code est \emph{l'appel récursif}.
 de droite à gauche, avec un seul appel récursif !
 \item {\bf A vous - \tt empilements6}. Sur le modèle de l'exercice précédent, écrivez une fonction récursive mais qui
 fasse une récurrence descendante, de la position 9 à la position 0 en empilant des cubes. Puis modifiez le code afin
-d'obtenir un empilement de droite à gauche, suivit d'une seconde ligne de gauche à droite (toujours un seul appel récursif.)
+d'obtenir un empilement de droite à gauche, suivi d'une seconde ligne de gauche à droite (toujours un seul appel récursif.)
 \item {\bf remplissage - \tt empilements7 } La fonction {\tt f0} de l'exercice précédent, dans sa première version permettait de remplir
 toute une ligne. Pouvez-vous créer une deuxième fonction qui va appeler {\tt f0} pour remplir une ligne, 
 puis qui va s'appeler elle-même afin de remplir la ligne du-dessus ? Si cela fonctionne, tout l'écran sera rempli par récurrence.
@@ -220,7 +221,7 @@ qui consiste en général à partir d'un endroit précis et d'explorer de proche
 
 
 \begin{action}
-\item {\bf démonstration - \tt demo\_grille2.mp4} visualiser le film {\tt demo\_grille2.mp4} afin de voir concrètement l'objectif de cette partie.
+\item {\bf démonstration - \tt demo\_grille1.mp4} visualiser le film {\tt demo\_grille1.mp4} afin de voir concrètement l'objectif de cette partie.
 \end{action}
 \begin{icone}{img/lecture.jpg}
 Il s'agit d'une version préliminaire des algorithmes de plus court chemin. Dans cette version, Pacman se trouve dans un environnement 2D
@@ -233,14 +234,15 @@ des cases auxquelles Pacman peut accéder, en visualisant de plus les appels ré
 \begin{action}
 \item {\bf tuto de l'API - \tt grille0.} lisez le code de {\tt grille0.py} et exécutez. Attention surveillez aussi le terminal. Le but
 est de comprendre l'interface qui sera utilisée ensuite.
-\item {\bf première tentative - \tt grille1} Même chose, sauf qu'ici on fait se déplacer pacman jusqu'à ce qu'il rencontre une case non valide.
-Essayez de modifier ce code pour que tout se passe comme dans le film {\tt demo\_grille1.py}.
+\item {\bf première tentative - \tt grille1} Même chose, sauf qu'ici on fait se déplacer pacman jusqu'à ce qu'il soit coincé.
+Essayez de modifier ce code pour que tout se passe comme dans le film {\tt demo\_grille2.py}.
 \begin{itemize}
     \item lorsque Pacman se déplace, on marque son déplacement avec une flèche rouge.
     \item lorsque Pacman rencontre un obstacle, il essaie de repartir dans une autre direction. Indication : on peut faire
     {\tt dx, dy = dy, -dx} pour effectuer un quart de tour sur la direction !
     \item Si toutes les directions sont bloquées car soit déjà explorées (couleur "blue") ou invalides, alors le programme se termine.
 \end{itemize}
+Peut-on faire mieux avec cet algorithme? Réussir à visiter toutes les cases accessibles?
 \item {\bf version récursive - \tt grille2} Finalement, la technique ci-dessus a clairement ses limites : Pacman peut se retrouver bloqué et 
 il faut trouver le moyen de "repartir en arrière". C'est là qu'intervient la récursivité et la pile d'appels (ou pile de récursivité)
 fait ce travail pour nous. Complétez la fonction {\tt exploration} qui se trouve dans le fichier grille2. La spécification de la fonction
@@ -257,7 +259,40 @@ donne les instructions à suivre.
 
 
 \begin{action}
+\item Faites tourner ce programme sur papier (ou dans votre tête) et déterminez ce qu'il fait:
+\begin{code}
+def fx(t, n):
+    if n == len(t):
+        return 0
 
+    if t[n] == 0:
+        return 1+fx(t, n+1)
+    else:
+        return fx(t, n+1)
+
+l = [5,3,4,2,0,4,2,0,0,1,0,2]
+print(fx(l,0))
+\end{code}
+
+\item Faites tourner ce programme sur papier (ou dans votre tête) et déterminez ce qu'il fait:
+\begin{code}
+def fx(t, n, d, f):
+    if d>f:
+        return False
+    
+    m = (d+f)//2
+    if t[m] == n:
+        return True
+    elif t[m] > n:
+        return fx(t, n, d, m-1)
+    else:
+        return fx(t, n, m+1, f)
+
+l = [1,4,8,9,12,17,21,25,90]
+print(fx(l, 8, 0, len(l)-1))
+print(fx(l, 10, 0, len(l)-1))
+print(fx(l, 1, 0, len(l)-1))
+\end{code}
   
 \item
   \'Ecrire une fonction récursive qui renvoie la somme des entiers $0 ^2 + 1^2 +
@@ -281,19 +316,6 @@ par recherche dichotomique.\\
 
 \item
 \'Ecrire une fonction récursive calculant les termes de la suite de Fibonacci 1 1 2 3 5 8 13 21 34 ... Cette fonction est-elle efficace en termes de complexité algorithmique ? Comment l'améliorer ?
-
-\item On considère un tableau 2D rectangulaire composé de 'v' et de 'm'. Les 'v' représentent des cases
-  vides et les 'm' représentent des murs. On imagine un personnage
-  qui peut se déplacer dans les quatre directions principales du tableau
-  mais ne peut pas franchir les murs.
-
-  \'Ecrire une fonction utilisant la récursivité qui calcule, étant données les
-  coordonnées
-  d'une case 'v' initiale, quels sont les cases où peut se rendre le personnage
-  et celles qui sont hors de portée.
-
-  La fonction renvoie la réponse sous la forme d'un nouveau tableau 2D contenant
-  des booléens dans chaque case indiquant si elles sont accessibles.
 
 \item \'Ecrire une fonction qui génère toutes les chaînes de caractères
 de longueur $k$ (par exemple, les mots de passe !) que l'on peut
