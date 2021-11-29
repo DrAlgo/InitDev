@@ -1,0 +1,230 @@
+\documentclass[11pt,a4paper]{article}
+
+
+\usepackage{amssymb,amsmath,amsfonts}    %ams
+\usepackage{wasysym} %des symboles
+%\usepackage{a4wide}
+\usepackage[tmargin=1in,bmargin=1in,lmargin=.75in,rmargin=.75in]{geometry}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+%\usepackage{multido}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,backgrounds}
+
+\usepackage[utf8]{inputenc} 
+%\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\newcommand{\R}{{\mathbb R}}   % reals
+\newcommand{\Q}{{\mathbb Q}}   % rationals
+\newcommand{\N}{{\mathbb N}}   %natural numbers
+\newcommand{\Z}{{\mathbb Z}}    %integers
+\renewcommand{\P}{{\mathbb P}}   %primes
+\newcommand{\F}{{\mathbb F}}
+
+\newcommand\cc{{\cal C}}
+\newcommand{\cw}{{\cal W}}
+
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem{example}{Example}
+\newtheorem{lemma}{Lemma}
+\newtheorem{newcommandi}{Definition}
+
+
+\newcommand{\proof}{\noindent {\bf Proof.\ \ }}
+
+\newcommand{\qed}{\hfill $\square$}
+
+
+\newcommand{\card}[1]{\vert #1 \vert}
+
+%\newcommand{\qed}{\hspace*{\fill} $\Box$ \bigskip }
+
+
+%\renewcommand{\thefootnote}{\Alph{footnote}}
+\usepackage{fancybox}
+\usepackage[french]{babel}
+%\usepackage{fullpage}
+\usepackage{multicol}
+\setlength{\columnseprule}{0.2pt}
+\setlength{\columnsep}{16pt}
+\usepackage{fancyhdr} % personalisation tete/pied de page
+%\pagestyle{fancy}
+
+
+
+
+
+
+
+\usepackage{hyperref}
+
+%\addtolength{\headheight}{50pt}
+
+\setlength{\parindent}{0pt}
+
+\title{Fiche 5.0 : complexité des algorithmes}
+\author{BUT Informatique\\
+IUT de Vélizy\\
+}
+\date{}
+
+
+%\catcode`\_=12 %for escaping underscore
+
+\newcommand{\ww}[1]{\textcolor{white}{#1}}
+
+\newcommand{\code}[1]{%
+    \begin{center}
+        \tt #1
+        \vskip .2cm
+        {\tt
+            \lstinputlisting[frame=single]{#1}
+        }
+    \end{center}
+}
+
+
+\usepackage{marginnote}
+
+\usepackage{fancyvrb} % Verbatim avancé
+
+\lstdefinestyle{customc}{
+    belowcaptionskip=1\baselineskip,
+    breaklines=true,
+    frame=single,
+    xleftmargin=2cm,
+    language=C,
+    showstringspaces=false,
+    showspaces=false,
+    basicstyle=\ttfamily
+}
+
+
+\newcommand{\reflexion}{\hspace{-1.2cm} \includegraphics[width=1cm]{reflexion.jpg} \vskip -.8cm}
+%\newcommand{\checkbox}{\includegraphics[width=.5cm]{checkbox.jpg} }
+\newcommand{\checkbox}{$\square$ \smallskip}
+
+
+%%environement pour les icones avec decalage
+\newenvironment{icone}[1]{%
+    \hskip -.8cm
+\begin{tabular}{c|c}
+    \hspace{.03\textwidth} \includegraphics[width=.07\textwidth]{#1} & 
+\begin{minipage}{.85\textwidth}
+}{%
+\end{minipage}
+\end{tabular}
+}
+
+
+
+
+
+\newcounter{exo} \setcounter{exo}{0}
+\newenvironment{action}{%
+    \begin{enumerate}[\numerotation] \addtocounter{exo}{-1}%
+        }{%
+    \end{enumerate}
+}
+
+%environement pour liste avec checkbox avec compteur
+\newcommand{\numexoa}{\theexo \addtocounter{exo}{1}}
+\newcommand{\numerotation}{\checkbox \smallskip \numexoa.}
+
+%%environement de validation
+\newenvironment{validation}{%
+\smallskip
+\begin{tabular}{c|c}
+    \hspace{.03\textwidth} \includegraphics[width=.07\textwidth]{teacher.jpg} & 
+\begin{minipage}{.85\textwidth}
+}{%
+\end{minipage}\\
+\hline
+\end{tabular}
+}
+
+
+%pour les fichiers c et dossiers
+\newcounter{exoo} \setcounter{exoo}{0}
+\newcommand{\numexo}{\theexoo}
+\newcommand{\repexo}{{\tt exo\_\numexo}}
+\newcommand{\exoplus}{\addtocounter{exoo}{1}}
+
+
+
+
+\begin{document}
+\maketitle
+
+
+
+
+
+\thispagestyle{empty}
+
+\setcounter{section}{-1}
+\section{Tris}
+Dans cette partie, vous allez écrire et tester {\em deux tris célèbres et assez simples à mettre en oeuvre}. Puis vous mesurerez leurs performances. Enfin, vous les comparerez au tri natif de python.\ 
+
+Vous travaillerez dans le fichier {\tt tri\_sort.py}, dans lequel vous progresserez au fur et à mesure de la lecture de cet énoncé.
+
+\subsection*{Génération de listes aléatoires}
+\begin{action}
+\item {\bf Fonction de génération de liste aléatoire} Afin de nourrir vos algorithmes de tri, vous allez écrire une fonction {\tt randlist} qui, pour un entier {\tt n} donné, renvoie une liste de {\tt n} entiers compris entre {\tt 0} et {\tt n-1} et mélangés aléatoirement (faites appel à la fonction {\tt shuffle()}).\ 
+
+Exemple de fonctionnement: {\tt randlist(4)} pourrait renvoyer {\tt [3, 1, 0, 2]}.
+\item {\bf Test de {\bf randlist()}} Une fois écrite cette fonction, complétez {\tt test\_randlist()} et vérifiez que {\tt randlist()} fonctionne correctement. {\bf Vous devez ecrire au moins 3 appels de test variés.}
+\end{action}
+
+\subsection*{Tri par sélection}
+\begin{action}
+\item {\bf Découverte du tri par sélection} Le principe du tri par sélection est assez simple:
+\begin{enumerate}
+  \item Rechercher dans la partie de la liste qui n'est pas encore triée la position de la valeur minimale.
+  \item Placer cette valeur en début de tableau en effectuant un échange des deux positions concernées.
+  \item Recommencer à l'étape (a) jusqu'à ce que toute la liste soit triée.
+\end{enumerate}
+Pour vous aider à bien comprendre le principe de ce tri, rendez-vous sur \href{https://visualgo.net/en/sorting}{Visualgo}, sélectionnez dans la barre du haut {\em SEL} (comme {\it selection sort}, le nom anglais du tri par sélection), et lancez le tri en cliquant sur {\em Sort} en bas à gauche.
+\item {\bf À vous de sélectionner} Complétez la fonction {\tt tri\_sel()}.
+\item {\bf Le moment de vérité} Complétez la fonction {\tt test\_tri\_sel()} qui va vous permettre de tester {\tt tri\_sel()} avec des listes aléatoires générées par {\tt randlist()}.\ 
+Effectuez également des tests avec des cas particuliers: {\bf trouvez-en au moins trois.}
+\end{action}
+
+\subsection*{Tri à bulles}
+\begin{action}
+\item {\bf Découverte des bulles} Rendez-vous à nouveau sur \href{https://visualgo.net/en/sorting}{Visualgo} afin de bien comprendre ce que fait le tri à bulles.
+\item {\bf À vous de buller} Codez le tri à bulles dans la fonction {\tt tri\_bul()}. Vous penserez à ajouter quelques lignes afin de vérifier s'il est possible d'interrompre l'algorithme quand on détecte que le tableau est trié avant la fin des boucles.
+\item {\bf Test des bulles} Complétez la fonction {\tt test\_tri\_bul()} afin de tester votre tri. Cette fonction peut être une simple copie de la fonction {\tt test\_tri\_sel()}.
+\end{action}
+
+\section{Mesures de performances}
+\subsection{Temps de calcul}
+\begin{action}
+\item {\bf Chrono reverse} Dans le fichier {\tt cpx\_sort.py}, l'exercice 8 vous montre comment mesurer le temps requis par l'exécution de certaines instructions données. Appelez cette fonction {\tt perf\_reverse()} et observez son fonctionnement.
+\item {\bf Perf des tris} Vous allez écrire une fonction {\tt perf\_tris()} qui va mesurer et stocker les performances de vos deux tris pour un nombre variable d'entiers. Par exemple, vous pourriez lancer vos tris sur des tableaux de taille {\tt 100, 200, 300, ..., 2900, 3000}.\  
+Vous stockerez  les temps obtenus dans des listes, dans l'ordre d'obtention des résultats.
+\end{action}
+
+\subsection{Graphiques}
+\begin{action}
+\item {\bf Démo pyplot} Dans le fichier {\tt cpx\_sort.py}, l'exercice 10 vous montre comment réaliser un affichage graphique des données d'une liste. Appelez cette fonction {\tt demo\_pyplot()} et observez son fonctionnement.
+\item {\bf Plotez} Vous êtes maintenant un as de {\tt pyplot}. Si si. Vous pouvez compléter votre fonction {\tt perf\_tris()} en y ajoutant l'affichage graphique des performances mesurées pour vos deux tris. 
+\item {\bf Bravo} Bravo.
+\end{action}
+
+\subsection{Comparatif}
+\begin{action}
+\item {\bf Sa seigneurie Quick sort} Nous allons maintenant nous mesurer à un adversaire de taille: l'algorithme {\em quick sort} implémenté dans la fonction native {\tt sort()} de python. Commencez par aller jeter un oeil sur le travail étrange que fait quick sort dans \href{https://visualgo.net/en/sorting}{Visualgo}. 
+\item {\bf The race} Dans votre fonction {\tt perf\_tris()}}, ajoutez un appel et une mesure des performances de quicksort. Appelez, mesurez, affichez, pleurez.
+\end{action}
+
+
+
+
+\end{document}
