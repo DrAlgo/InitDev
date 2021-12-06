@@ -118,7 +118,7 @@ IUT de Vélizy\\
     \hspace{.03\textwidth} \includegraphics[width=.07\textwidth]{#1} & 
 \begin{minipage}{.85\textwidth}
 }{%
-\end{minipage}
+\end{mieonipage}
 \end{tabular}
 }
 
@@ -172,6 +172,9 @@ IUT de Vélizy\\
 \section{Tris}
 Dans cette partie, vous allez écrire et tester {\em deux tris célèbres et assez simples à mettre en oeuvre}. Puis vous mesurerez leurs performances. Enfin, vous les comparerez au tri natif de python.\ 
 
+
+{\bf Objectif}: apprendre à mesurer et augmenter les performances de ses algorithmes.\ 
+
 Vous travaillerez dans le fichier {\tt tri\_sort.py}, dans lequel vous progresserez au fur et à mesure de la lecture de cet énoncé.
 
 \subsection*{Génération de listes aléatoires}
@@ -224,7 +227,36 @@ Vous stockerez  les temps obtenus dans des listes, dans l'ordre d'obtention des 
 \item {\bf The race} Dans votre fonction {\tt perf\_tris()}}, ajoutez un appel et une mesure des performances de quicksort. Appelez, mesurez, affichez, pleurez.
 \end{action}
 
+\newpage
+\section{Mini-projet}
+Vous êtes en avance? Nous vous invitons à donner un coup de main à vos camarades, ou a entamer le mini-projet qui suit. Son principe: coder soi-même un {\em tri quick sort}.\ 
 
+Surprise garantie si vous y parvenez.
+\subsection{Principe}
+Le principe général du {\em quick sort} est:
+\begin{itemize}
+  \item pour un tableau donné, choisir un pivot quelconque, c'est-à-dire une des valeurs du tableau;
+  \item retirer temporairement ce pivot du tableau;
+  \item placer toutes les valeurs inférieures ou égales au pivot en début de tableau et toutes les valeurs supérieures à la fin, puis replacez le pivot à la place restante;
+  \item à cet instant, {\bf le pivot se trouve à sa place définitive};
+  \item relancez récursivement ces étapes sur les deux sous-tableaux se trouvant à gauche et à droite du pivot.
+\end{itemize}
+Encore une fois, vous êtes invité.e.s à visionner le fonctionnement de ce tri sur \href{https://visualgo.net/en/sorting}{Visualgo}.
 
+\subsection{Pivot}
+Codez une fonction {\tt pivot(l, deb, fin)} qui, pour le sous-tableau de {\tt l} compris entre {\tt deb} et {\tt fin} inclus, choisit un pivot aléatoirement puis place les valeurs du sous-tableau à gauche et à droite du pivot, comme indiqué précédement.\ 
+
+{\bf Attention}: cette fonction est cruciale pour les performances du {\em quick sort}. Vous devez réussir à effectuer le classement \underline{en un seul passage, sans déplacer chaque valeur plus d'une fois}.
+
+\subsection{Fonction principale}
+{\bf Bonne nouvelle}, votre travail est quasiment terminé. En effet, il ne vous reste plus qu'à écrire une fonction récursive {\tt monqs(l, deb, fin)} de quelques lignes.
+
+\subsection{Performances}
+Comme dans les sections précédentes, mettez en place une mesure de performance de votre tri ainsi qu'un afficage graphique. Vous devez obtenir des performances bien meilleures que celles de vos tris quadratiques.\ 
+
+Nous verrons en TD pourquoi, et à quelles conditions, cet algorithme est si performant.
+
+\subsection{Surprise}
+Comparez graphiquement votre tri au {\em quick sort} natif de python. {\bf Caramba, que pasa?}
 
 \end{document}

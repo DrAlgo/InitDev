@@ -20,7 +20,7 @@ def exploration(i,j):
     et supprimer la flèche quand de la case voisine est est terminée
     """
 
-    g.changerCouleur(i,j,"blue")
+    g.changerCarre(i,j,"blue")
     g.placer_pacman(i,j)
     # a completer...
 
