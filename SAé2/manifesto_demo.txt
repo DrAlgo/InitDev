@@ -1,13 +1,17 @@
 FIRST#13#
 IP#CARGO#NEXT_IP#
 1#du lolo.#4#
-6#fond, qui#3#
-8#papa est en#11#
+6#bas, qui#3#
+8#Papa est au#11#
+14#fais dodo, t'auras#18#
 5#dodo, t'auras#1#
 12#Colas mon p'tit#2#
-9#du java#LAST#
+9#du python.#7#
+7#Fais dodo, Colas#15#
+18#du lolo.#LAST#
 13#Fais dodo#12#
-4#Maman est au#6#
-3#fait du python,#8#
+4#Maman est en#6#
+3#fait du java.#8#
+15#mon p'tit frère,#14#
 2#frère, fais#5#
-11#bas, qui fait#9#
+11#fond, qui fait#9#
