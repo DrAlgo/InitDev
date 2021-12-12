@@ -1,0 +1,12 @@
+FIRST#Fais dodo#12#
+IP#CARGO#NEXT_IP#
+1#du lolo.#4#
+6#haut, qui#3#
+8#papa est en#11#
+5#dodo, t'auras#1#
+12#Colas mon p'tit#2#
+9#chocolat#LAST#
+4#Maman est en#6#
+3#fait du gâteau,#8#
+2#frère, fais#5#
+11#bas, fais du#9#
