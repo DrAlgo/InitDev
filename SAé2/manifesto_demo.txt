@@ -1,4 +1,4 @@
-FIRST#Fais dodo#12#
+FIRST#13#
 IP#CARGO#NEXT_IP#
 1#du lolo.#4#
 6#fond, qui#3#
@@ -6,6 +6,7 @@ IP#CARGO#NEXT_IP#
 5#dodo, t'auras#1#
 12#Colas mon p'tit#2#
 9#du java#LAST#
+13#Fais dodo#12#
 4#Maman est au#6#
 3#fait du python,#8#
 2#frère, fais#5#
