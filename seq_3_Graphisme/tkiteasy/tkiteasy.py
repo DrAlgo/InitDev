@@ -57,8 +57,8 @@ class Canevas(tk.Canvas):
     def dessinerDisque(self, x, y, r, col):
         return ObjetGraphique(self.create_oval(x-r, y-r, x+r, y+r, width=0, fill=col), x, y, col)
 
-#     def changerPixel(self, x, y, col):
-#         return ObjetGraphique(self.dessinerRectangle(x,y,1,1,col), x, y, col)
+    def changerPixel(self, x, y, col):
+        return ObjetGraphique(self.dessinerRectangle(x,y,1,1,col), x, y, col)
 
     def afficherImage(self, x, y, filename):
         image = Image.open(filename)
